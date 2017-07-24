@@ -1,10 +1,11 @@
 import {Component} from '@angular/core'
+import {ProductService} from '../products/product.service';
 
 @Component({
     selector : 'adTable',
     template : `
     <br><br><input type ='text' #search style="width:100%" (keyup)="0">
-    <table *ngFor="let obj of arrayAdList | FilterPipe : search.value" border="1px">
+    <table *ngFor="let obj of getAdfromService() | FilterPipe : search.value" border="1px">
                <tr>
      
     <td>{{obj.title}} </td>
@@ -17,12 +18,12 @@ import {Component} from '@angular/core'
     
  </tr> 
 </table>`,
-inputs: ['arrayAdList']
+
 
 })
 
 export class sampleTable{
- arrayAdList : any[];
+ arrayAdList :{title:any,name:any,cate:any,desc:any} []=[];
 
  ondelete(obj1 : any){
     var index=this.arrayAdList.indexOf(obj1,0);
@@ -30,4 +31,14 @@ export class sampleTable{
         this.arrayAdList.splice(index,1);
     }
  }
+  constructor( private productService: ProductService) 
+    {
+
+    }
+
+    getAdfromService(){
+        return this.productService.getAllAd();
+
+    
+    }
 }

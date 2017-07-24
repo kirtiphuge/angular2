@@ -27,17 +27,19 @@ export class sample {
    cate:String;
    desc: String;
 
-   public childEvent = new EventEmitter<sample>(); 
+   public childEvent = new EventEmitter<any>(); 
 category:string[]=["Mobile","Car","Furniture"];
    onChange(value1:any,value2:any,value3:any,value4:any)
    {
-     let obj=new sample();
-     obj.title=value1;
-     obj.name=value2;
-     obj.cate=value3;
-     obj.desc=value4;
-
-    this.childEvent.emit(obj);  }
+     
+     let obj={
+     title:value1,
+     name:value2,
+     cate:value3,
+     desc:value4
+     }
+    this.childEvent.emit(obj); 
+  console.log(obj); }
 
 
    }
